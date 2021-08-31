@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const session = require("express-session")
 const redis = require("redis")
+const cors = require("cors")
 const {
   MONGO_USER,
   MONGO_PASSWORD,
@@ -39,6 +40,7 @@ const connectWithRetry = () => {
 
 connectWithRetry()
 app.enable("trust proxy") // for production nginx
+app.use(cors())
 app.use(session({
   store: new RedisStore({client: redisClient}),
   secret: SESSION_SECRET,
