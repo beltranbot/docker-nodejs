@@ -38,7 +38,7 @@ const connectWithRetry = () => {
 }
 
 connectWithRetry()
-
+app.enable("trust proxy") // for production nginx
 app.use(session({
   store: new RedisStore({client: redisClient}),
   secret: SESSION_SECRET,
